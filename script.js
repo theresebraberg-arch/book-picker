@@ -165,13 +165,28 @@ const books = [
 function showResult(){
 
   let filtered = books.filter(b => b.mood === answers.mood);
-  if(filtered.length === 0) filtered = books;
+
+  if(answers.genre !== "any"){
+    filtered = filtered.filter(b => b.genre === answers.genre);
+  }
+
+  if(filtered.length){
+    filtered = filtered.filter(b => b.energy === answers.energy);
+  }
+
+  if(filtered.length && answers.length !== "any"){
+    filtered = filtered.filter(b => b.length === answers.length);
+  }
+
+  if(filtered.length === 0){
+    filtered = books;
+  }
 
   const book = filtered[Math.floor(Math.random()*filtered.length)];
 
   document.getElementById("questionArea").innerHTML = `
     <h2>✨ Din bok ✨</h2>
-    <p>${book.title}</p>
+    <p style="font-size:20px; font-weight:bold;">${book.title}</p>
     <br>
     <button onclick="location.reload()">Kör igen</button>
   `;
