@@ -45,7 +45,7 @@ body {
 /* 💜 CARD */
 .container {
   width: 600px;
-  padding: 50px;
+  padding: 30px;
   border-radius: 30px;
 
   background: rgba(255,255,255,0.7);
@@ -57,6 +57,8 @@ body {
 
   text-align: center;
   position: relative;
+
+  box-sizing: border-box;
 }
 
 /* ✨ PROGRESS DOTS */
@@ -95,8 +97,8 @@ h2 {
   gap: 15px;
 }
 
-
 button {
+  width: 100%;
   padding: 15px;
   border-radius: 20px;
   border: none;
