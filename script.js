@@ -185,7 +185,7 @@ function showResult(){
   `;
 }
 
-
+const book = filtered[Math.floor(Math.random()*filtered.length)];
 
   document.getElementById("questionArea").innerHTML = `
     <h2>✨ Din bok ✨</h2>
