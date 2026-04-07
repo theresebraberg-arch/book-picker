@@ -1,69 +1,57 @@
-let answers = {
-  mood: "",
-  genre: "",
-  energy: "",
-  length: ""
-};
-
-let lastPickedTitle = "";
-
-const books = [
-  {title:"Love and Other Words", author:"Christina Lauren", mood:"love", genre:"romance", energy:"low", length:"long", vibe:"Second chance heartbreak", ritual:"Filt + te"},
-  {title:"Things We Never Got Over", author:"Lucy Score", mood:"love", genre:"romance", energy:"medium", length:"long", vibe:"Grumpy x sunshine", ritual:"Cozy vibes"},
-  {title:"The Inmate", author:"Freida McFadden", mood:"thrill", genre:"thriller", energy:"medium", length:"short", vibe:"Obehaglig", ritual:"Kväll"},
-  {title:"Divine Rivals", author:"Rebecca Ross", mood:"cozy", genre:"fantasy", energy:"low", length:"long", vibe:"Romance + brev", ritual:"Ljus + filt"},
-  {title:"If He Had Been With Me", author:"Laura Nowlin", mood:"cry", genre:"romance", energy:"medium", length:"long", vibe:"Tomhet efteråt", ritual:"Läs i tystnad"}
-];
-
-function startGame(){
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("quizScreen").classList.remove("hidden");
-
-  renderQuestion();
-}
+let step = 0;
+let mood = "";
 
 function renderQuestion(){
+
+  const area = document.getElementById("questionArea");
+
+  if(step === 0){
+    area.innerHTML = `
+      <h2>Hur vill du känna?</h2>
+      <p class="sub">Välj kvällens huvudvibe.</p>
+
+      <div class="button-grid">
+        <button onclick="chooseMood('cry')">😭 Jag vill gråta</button>
+        <button onclick="chooseMood('love')">😍 Jag vill ha kärlek</button>
+        <button onclick="chooseMood('thrill')">😱 Jag vill ha spänning</button>
+        <button onclick="chooseMood('cozy')">😌 Jag vill ha mys</button>
+      </div>
+    `;
+  }
+}
+
+function chooseMood(m){
+  mood = m;
+  step++;
+  updateProgress();
+  showResult();
+}
+
+function updateProgress(){
+  const dots = document.querySelectorAll(".dot");
+  dots.forEach((d,i)=> d.classList.toggle("active", i<=step));
+}
+
+const books = [
+  {title:"Love and Other Words", mood:"love"},
+  {title:"The Inmate", mood:"thrill"},
+  {title:"Divine Rivals", mood:"cozy"},
+  {title:"If He Had Been With Me", mood:"cry"}
+];
+
+function showResult(){
+
+  let filtered = books.filter(b => b.mood === mood);
+  if(filtered.length === 0) filtered = books;
+
+  const book = filtered[Math.floor(Math.random()*filtered.length)];
+
   document.getElementById("questionArea").innerHTML = `
-    <p>Hur vill du känna?</p>
-    <button onclick="setMood('cry')">😭</button>
-    <button onclick="setMood('love')">😍</button>
-    <button onclick="setMood('thrill')">😱</button>
-    <button onclick="setMood('cozy')">😌</button>
+    <h2>✨ Din bok ✨</h2>
+    <p>${book.title}</p>
+    <br>
+    <button onclick="location.reload()">Kör igen</button>
   `;
 }
 
-function setMood(m){
-  answers.mood = m;
-  showResult();
-}
-
-function pickBook(){
-  let filtered = books.filter(b => b.mood === answers.mood);
-
-  if(filtered.length === 0){
-    filtered = books;
-  }
-
-  return filtered[Math.floor(Math.random()*filtered.length)];
-}
-
-function showResult(){
-  const book = pickBook();
-  lastPickedTitle = book.title;
-
-  document.getElementById("quizScreen").classList.add("hidden");
-  document.getElementById("resultScreen").classList.remove("hidden");
-
-  document.getElementById("bookTitle").textContent = book.title;
-  document.getElementById("bookAuthor").textContent = book.author;
-  document.getElementById("bookVibe").textContent = book.vibe;
-  document.getElementById("bookRitual").textContent = book.ritual;
-}
-
-function showAnother(){
-  showResult();
-}
-
-function playAgain(){
-  location.reload();
-}
+renderQuestion();
