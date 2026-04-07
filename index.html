@@ -15,24 +15,14 @@
 
 <div class="container">
 
-  <div id="startScreen">
-    <h1>✨ Vad ska du läsa ikväll? ✨</h1>
-    <button onclick="startGame()">Starta ✨</button>
+  <div class="progress">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
   </div>
 
-  <div id="quizScreen" class="hidden">
-    <div id="questionArea"></div>
-  </div>
-
-  <div id="resultScreen" class="hidden">
-    <h2 id="bookTitle"></h2>
-    <p id="bookAuthor"></p>
-    <p id="bookVibe"></p>
-    <p id="bookRitual"></p>
-
-    <button onclick="playAgain()">Kör igen</button>
-    <button onclick="showAnother()">En till</button>
-  </div>
+  <div id="questionArea"></div>
 
 </div>
 
