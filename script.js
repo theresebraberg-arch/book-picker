@@ -33,6 +33,7 @@ function renderQuestion(){
       <div class="button-grid">
         <button onclick="next('genre','romance')">Romance</button>
         <button onclick="next('genre','fantasy')">Fantasy</button>
+        <button onclick="next('genre','romantasy')">Romantasy 💜</button>
         <button onclick="next('genre','thriller')">Thriller</button>
         <button onclick="next('genre','any')">Surprise</button>
       </div>
