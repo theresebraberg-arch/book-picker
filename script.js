@@ -26,19 +26,19 @@ function renderQuestion(){
   }
 
   else if(step === 1){
-    area.innerHTML = `
-      <h2>Vad är du sugen på?</h2>
-      <p class="sub">Genre</p>
+  area.innerHTML = `
+    <h2>Vad är du sugen på?</h2>
+    <p class="sub">Genre</p>
 
-      <div class="button-grid">
-        <button onclick="next('genre','romance')">Romance</button>
-        <button onclick="next('genre','fantasy')">Fantasy</button>
-        <button onclick="next('genre','romantasy')">Romantasy 💜</button>
-        <button onclick="next('genre','thriller')">Thriller</button>
-        <button onclick="next('genre','any')">Surprise</button>
-      </div>
-    `;
-  }
+    <div class="button-grid">
+      <button onclick="next('genre','romance')">Romance</button>
+      <button onclick="next('genre','fantasy')">Fantasy</button>
+      <button onclick="next('genre','romantasy')">Romantasy 💜</button>
+      <button onclick="next('genre','thriller')">Thriller</button>
+      <button onclick="next('genre','any')">Surprise</button>
+    </div>
+  `;
+}
 
   else if(step === 2){
     area.innerHTML = `
