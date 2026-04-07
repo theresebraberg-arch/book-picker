@@ -1,33 +1,115 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e6ccff, #ffccf2);
+  font-family: 'Segoe UI', sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: linear-gradient(135deg, #e6ccff, #ffccf2);
+  overflow: hidden;
 }
 
+/* ✨ FLOATING BLOBS */
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.6;
+}
+
+.blob1 {
+  width: 400px;
+  height: 400px;
+  background: #ff99cc;
+  top: 10%;
+  left: 10%;
+}
+
+.blob2 {
+  width: 300px;
+  height: 300px;
+  background: #cc99ff;
+  bottom: 10%;
+  right: 10%;
+}
+
+.blob3 {
+  width: 250px;
+  height: 250px;
+  background: #ffffff;
+  top: 50%;
+  left: 60%;
+}
+
+/* 💜 CARD */
 .container {
-  width: 500px;
-  padding: 40px;
+  width: 600px;
+  padding: 50px;
   border-radius: 30px;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.25),
+    0 0 60px rgba(204,153,255,0.5);
+
   text-align: center;
+  position: relative;
+}
+
+/* ✨ PROGRESS DOTS */
+.progress {
+  margin-bottom: 20px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 5px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.active {
+  background: #cc99ff;
+}
+
+/* ✨ TEXT */
+h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.sub {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* 💥 BUTTON GRID */
+.button-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
 button {
-  margin: 10px;
-  padding: 12px 18px;
+  padding: 15px;
   border-radius: 20px;
   border: none;
+  font-size: 15px;
+  font-weight: bold;
+
   background: linear-gradient(135deg, #cc99ff, #ff99cc);
   color: white;
+
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.hidden {
-  display: none;
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
