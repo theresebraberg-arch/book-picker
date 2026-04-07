@@ -171,24 +171,56 @@ function showResult(){
 
   let filtered = books;
 
-  // mood
+  // mood (måste matcha)
   filtered = filtered.filter(b => b.mood === answers.mood);
 
-  // genre
+  // genre (måste matcha om vald)
   if(answers.genre !== "any"){
-    let temp = filtered.filter(b => b.genre === answers.genre);
-    if(temp.length) filtered = temp;
+    filtered = filtered.filter(b => b.genre === answers.genre);
   }
 
-  // energy
-  let tempEnergy = filtered.filter(b => b.energy === answers.energy);
-  if(tempEnergy.length) filtered = tempEnergy;
+  // energy (valfri – fallback om tom)
+  let energyFiltered = filtered.filter(b => b.energy === answers.energy);
+  if(energyFiltered.length > 0){
+    filtered = energyFiltered;
+  }
 
-  // length
+  // length (valfri – fallback om tom)
   if(answers.length !== "any"){
-    let tempLength = filtered.filter(b => b.length === answers.length);
-    if(tempLength.length) filtered = tempLength;
+    let lengthFiltered = filtered.filter(b => b.length === answers.length);
+    if(lengthFiltered.length > 0){
+      filtered = lengthFiltered;
+    }
   }
+
+  // 💥 OM INGET FINNS → visa meddelande
+  if(filtered.length === 0){
+    document.getElementById("questionArea").innerHTML = `
+      <h2>😅 Oops!</h2>
+      <p>Det finns ingen bok som matchar exakt…</p>
+      <p>Testa en annan kombination 💜</p>
+      <br>
+      <button onclick="location.reload()">Försök igen</button>
+    `;
+    return;
+  }
+
+  const book = filtered[Math.floor(Math.random()*filtered.length)];
+
+  document.getElementById("questionArea").innerHTML = `
+    <h2>✨ Din bok ✨</h2>
+
+    <img 
+      src="https://covers.openlibrary.org/b/title/${encodeURIComponent(book.title)}-M.jpg"
+      style="width:130px; border-radius:12px; margin:15px 0;"
+    >
+
+    <p style="font-size:20px; font-weight:bold;">${book.title}</p>
+
+    <br>
+    <button onclick="location.reload()">Kör igen</button>
+  `;
+}
 
   const book = filtered[Math.floor(Math.random()*filtered.length)];
 
