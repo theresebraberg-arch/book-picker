@@ -93,23 +93,36 @@ const books = [
 
 function showResult(){
 
-  let filtered = books.filter(b => b.mood === answers.mood);
+  let filtered = books;
 
+  // steg 1 – mood (ALLTID viktigt)
+  filtered = filtered.filter(b => b.mood === answers.mood);
+
+  // steg 2 – genre (om valt)
   if(answers.genre !== "any"){
-    filtered = filtered.filter(b => b.genre === answers.genre);
+    let temp = filtered.filter(b => b.genre === answers.genre);
+    if(temp.length) filtered = temp;
   }
 
-  if(filtered.length){
-    filtered = filtered.filter(b => b.energy === answers.energy);
+  // steg 3 – energy
+  let tempEnergy = filtered.filter(b => b.energy === answers.energy);
+  if(tempEnergy.length) filtered = tempEnergy;
+
+  // steg 4 – length
+  if(answers.length !== "any"){
+    let tempLength = filtered.filter(b => b.length === answers.length);
+    if(tempLength.length) filtered = tempLength;
   }
 
-  if(filtered.length && answers.length !== "any"){
-    filtered = filtered.filter(b => b.length === answers.length);
-  }
+  const book = filtered[Math.floor(Math.random()*filtered.length)];
 
-  if(filtered.length === 0){
-    filtered = books;
-  }
+  document.getElementById("questionArea").innerHTML = `
+    <h2>✨ Din bok ✨</h2>
+    <p style="font-size:20px; font-weight:bold;">${book.title}</p>
+    <br>
+    <button onclick="location.reload()">Kör igen</button>
+  `;
+}
 
   const book = filtered[Math.floor(Math.random()*filtered.length)];
 
