@@ -171,16 +171,20 @@ function showResult(){
 
   let filtered = books;
 
+  // mood
   filtered = filtered.filter(b => b.mood === answers.mood);
 
+  // genre
   if(answers.genre !== "any"){
     let temp = filtered.filter(b => b.genre === answers.genre);
     if(temp.length) filtered = temp;
   }
 
+  // energy
   let tempEnergy = filtered.filter(b => b.energy === answers.energy);
   if(tempEnergy.length) filtered = tempEnergy;
 
+  // length
   if(answers.length !== "any"){
     let tempLength = filtered.filter(b => b.length === answers.length);
     if(tempLength.length) filtered = tempLength;
@@ -190,7 +194,14 @@ function showResult(){
 
   document.getElementById("questionArea").innerHTML = `
     <h2>✨ Din bok ✨</h2>
+
+    <img 
+      src="https://covers.openlibrary.org/b/title/${encodeURIComponent(book.title)}-M.jpg"
+      style="width:130px; border-radius:12px; margin:15px 0;"
+    >
+
     <p style="font-size:20px; font-weight:bold;">${book.title}</p>
+
     <br>
     <button onclick="location.reload()">Kör igen</button>
   `;
