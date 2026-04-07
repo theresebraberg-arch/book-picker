@@ -164,7 +164,7 @@ const books = [
 
 function showResult(){
 
-  let filtered = books.filter(b => b.mood === mood);
+  let filtered = books.filter(b => b.mood === answers.mood);
   if(filtered.length === 0) filtered = books;
 
   const book = filtered[Math.floor(Math.random()*filtered.length)];
